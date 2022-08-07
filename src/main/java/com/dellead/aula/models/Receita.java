@@ -21,7 +21,7 @@ public class Receita {
 
     @Column(length = 100, nullable = false)
     @NotNull
-    @Size(min = 3, max = 200)
+    @Size(min = 3, max = 100)
     private String titulo;
 
     @Column(nullable = false, columnDefinition="TEXT")
@@ -32,7 +32,13 @@ public class Receita {
     @NotNull
     private String procedimentos;
 
+    private String imagem;
+
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "categoria_id", nullable = false)
+    private Categoria categoria;
 }
