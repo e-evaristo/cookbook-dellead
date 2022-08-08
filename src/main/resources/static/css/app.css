@@ -1,0 +1,18 @@
+.bg-login-image {
+  background: url("../img/login.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+#wrapper #content-wrapper {
+    background-color: rgb(222, 227, 241);
+}
+
+.ui-autocomplete{
+   z-index: 1050 !important;
+}
+
+.ui-menu-item-wrapper {
+    font-size: 14px;
+}

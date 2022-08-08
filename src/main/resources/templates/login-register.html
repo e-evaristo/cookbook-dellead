@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org" lang="pt-BR">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CookBook :: Dellead</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/css/app.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-gradient-primary">
+
+    <div class="container">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-10 col-lg-12 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+
+                	<div class="row" style="margin: 10px auto;">
+                		<div class="col-lg-12">
+                        	<div th:if="${alerta != null}" th:class="${alerta == 'erro'} ? 'alert alert-danger' : 'alert alert-success'" role="alert">
+							  <h4 th:text="${titulo}" class="alert-heading">Credenciais</h4>
+							  <p th:text="${texto}">Login ou senha incorretos...</p>
+							</div>
+                    	</div>
+                    </div>
+
+                    <div class="card-body p-0">
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                            	<div class="text-center">
+				                    <h1 class="h4 text-gray-900 mb-3">CookBook :: Dellead</h1>
+				                </div>
+
+                                <div class="p-5">
+                                    <div class="">
+                                        <h1 class="h4 text-gray-900 mb-3">LOGIN</h1>
+                                    </div>
+                                    <form class="user" method="POST" th:action="@{/login}">
+
+                                        <div class="form-group row">
+                                        	<div class="col-sm-4 mb-3 mb-sm-0">
+                                            	<input type="email" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Informe seu e-mail" autocomplete="email" inputmode="email" required>
+                                            </div>
+                                            <div class="col-sm-4">
+                                            	<input type="password" class="form-control" id="password" name="password" placeholder="Senha" autocomplete="new-password" required>
+                                            </div>
+                                            <div class="col-sm-4">
+                                            	<button type="submit" class="btn btn-primary btn-block">LOGIN</button>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                    <hr>
+                                    <div class="">
+                                        <h1 class="h4 text-gray-900 mb-3 mt-4">CADASTRE-SE</h1>
+                                    </div>
+                                    <form method="POST" th:action="@{/register}" th:object="${usuario}">
+	                                    <div class="form-group row">
+	                                    	<div class="col-sm-6 mb-3 mb-sm-0">
+	                                    		<label>Nome</label>
+		                                    	<input type="text" th:field="*{nome}" class="form-control" id="nome" placeholder="Nome Completo *" autocomplete="name">
+		                                    	<span class="text-xs text-danger" th:if="${#fields.hasErrors('nome')}"  th:errors="*{nome}"></span>
+		                                    </div>
+		                                    <div class="col-sm-6">
+		                                    	<label>E-mail</label>
+		                                    	<input type="email" th:field="*{email}" class="form-control" id="email" placeholder="Email *" autocomplete="email" required>
+		                                    	<span class="text-xs text-danger" th:if="${#fields.hasErrors('email')}"  th:errors="*{email}"></span>
+		                                    </div>
+		                                </div>
+
+		                                <div class="form-group row">
+		                                	<div class="col-sm-6 mb-3 mb-sm-0">
+		                                		<label>Confirmar E-mail</label>
+		                                    	<input type="email" th:field="*{emailConfirm}" class="form-control" id="emailConfirm" placeholder="Email *" autocomplete="email" required>
+		                                    	<span class="text-xs text-danger" th:if="${#fields.hasErrors('emailConfirm')}"  th:errors="*{emailConfirm}"></span>
+		                                    </div>
+		                                    <div class="col-sm-6">
+		                                    	<label>Senha</label>
+		                                    	<input type="password" th:field="*{senha}" class="form-control" id="senha" placeholder="Senha *" autocomplete="new-password" required>
+	                        					<span class="text-xs text-danger" th:if="${#fields.hasErrors('senha')}"  th:errors="*{senha}"></span>
+		                                    </div>
+		                                </div>
+
+		                                <div class="form-group row">
+		                                	<div class="col-sm-6 mb-3 mb-sm-0">
+		                                		<label>Data de Nascimento</label>
+		                                		<div class="row">
+		                                			<div class="col-sm-4 mb-3 mb-sm-0">
+				                                    	<select class="form-control" th:field="*{dtnasc_dia}" required>
+				                                    		<option value="">Dia</option>
+				                                    		<option th:each="dia : ${#numbers.sequence(1, 31)}" th:value="${T(java.lang.String).format('%02d', {dia})}" th:text="${T(java.lang.String).format('%02d', {dia})}"></option>
+													    </select>
+													</div>
+													<div class="col-sm-4 mb-3">
+													    <select class="form-control" th:field="*{dtnasc_mes}" required>
+													      <option value="">Mês</option>
+													      <option value="01">Janeiro</option>
+													      <option value="02">Fevereiro</option>
+													      <option value="03">Março</option>
+													      <option value="04">Abril</option>
+													      <option value="05">Maio</option>
+													      <option value="06">Junho</option>
+													      <option value="07">Julho</option>
+													      <option value="08">Agosto</option>
+													      <option value="09">Setembro</option>
+													      <option value="10">Outurbro</option>
+													      <option value="11">Novembro</option>
+													      <option value="12">Dezembro</option>
+													    </select>
+													</div>
+													<div class="col-sm-4 mb-3">
+													    <select class="form-control" th:field="*{dtnasc_ano}" required>
+													    	<option value="">Ano</option>
+													      	<option th:each="ano : ${#numbers.sequence(1922, #dates.year(#dates.createNow()))}" th:value="${ano}" th:text="${ano}"></option>
+													    </select>
+													</div>
+											    </div>
+											    <div class="row">
+											    	<div class="col-sm-6 mb-3">
+														<span class="text-xs text-danger" th:if="${#fields.hasErrors('dataNascimento')}"  th:errors="*{dataNascimento}"></span>
+													</div>
+											    </div>
+		                                    </div>
+		                                    <div class="col-sm-6">
+		                                    	<label>Sexo</label>
+		                                    	<div class="row">
+		                                    		<div class="col-sm-6">
+			                                    		<div class="form-check">
+														  <input class="form-check-input" type="radio" value="M" th:field="*{sexo}" checked>
+														  <label class="form-check-label">Masculino</label>
+														</div>
+													</div>
+													<div class="col-sm-6">
+														<div class="form-check">
+														  <input class="form-check-input" type="radio" th:field="*{sexo}" value="F">
+														  <label class="form-check-label">Feminino</label>
+														</div>
+		                                    		</div>
+		                                    	</div>
+		                                    </div>
+		                                </div>
+
+		                                <div class="form-group row">
+		                                	<div class="col-sm-6">
+		                                		<button class="btn btn-primary" type="submit">CADASTRAR</button>
+		                                	</div>
+		                                </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/js/sb-admin-2.min.js"></script>
+
+</body>
+
+</html>
